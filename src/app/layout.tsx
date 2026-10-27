@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "First Print — quote off the decoded block",
+  title: "Optimum Signal — the quote comes off when the block arrives",
   description:
     "A desk console that prices Optimum mump2p's published Ethereum head lead as avoided pickoff on an institutional quote.",
 };

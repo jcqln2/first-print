@@ -84,24 +84,23 @@ export function DeskApp() {
   }
 
   return (
-    <main className="mx-auto min-h-screen max-w-6xl px-4 py-8 sm:px-6 sm:py-10">
-      <header className="flex flex-wrap items-end justify-between gap-6 border-b border-line pb-6">
-        <div className="max-w-2xl">
-          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted">
-            First Print · desk pilot
-          </p>
-          <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">
-            The quote comes off when the block decodes.
-          </h1>
-          <p className="mt-3 text-sm leading-relaxed text-muted sm:text-base">
-            For a desk that quotes, hedges, or marks inventory off the Ethereum head.
-            mump2p delivers the block as coded shards, so the gateway can decode before
-            standard gossip has finished the message. This book turns Optimum&apos;s published
-            lead into the pickoff that quote no longer wears.
-          </p>
+    <main className="mx-auto min-h-screen max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
+      <header className="text-center">
+        <div className="inline-flex items-center gap-3 rounded-full bg-white py-1.5 pl-1.5 pr-3 shadow-[0_8px_30px_rgba(22,32,48,0.08)]">
+          <Mark />
+          <span className="text-[15px] font-semibold tracking-tight">optimum</span>
+          <span className="h-4 w-px bg-line" />
+          <span className="font-mono text-[11px] tracking-[0.16em] text-muted">SIGNAL</span>
         </div>
-        <p className="rounded-full border border-line px-3 py-1 font-mono text-[11px] uppercase tracking-wider text-stale">
-          Seeded scenario · one book
+        <h1 className="mx-auto mt-8 max-w-xl text-4xl font-semibold tracking-tight text-ink sm:text-5xl">
+          The quote comes off when the block arrives.
+        </h1>
+        <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted">
+          For a desk that quotes off the Ethereum head. Optimum Signal gets the block
+          there first, so the old price is already gone.
+        </p>
+        <p className="mt-4 inline-flex rounded-full bg-white px-3 py-1 text-xs text-muted shadow-sm">
+          A seeded book, so you can see one session
         </p>
       </header>
 
@@ -124,7 +123,7 @@ export function DeskApp() {
       </section>
 
       <section className="mt-8 grid gap-6 lg:grid-cols-[17rem_minmax(0,1fr)]">
-        <aside className="space-y-6">
+        <aside className="h-fit space-y-6 rounded-3xl border border-line bg-white p-5 shadow-[0_12px_40px_rgba(22,32,48,0.06)]">
           <fieldset>
             <legend className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted">
               Book
@@ -135,14 +134,16 @@ export function DeskApp() {
                   key={id}
                   type="button"
                   onClick={() => chooseAsset(id)}
-                  className={`rounded-xl border px-3 py-2 text-left ${
+                  className={`rounded-2xl border px-3 py-2.5 text-left shadow-sm ${
                     assetId === id
-                      ? "border-keep/50 bg-keep-dim"
-                      : "border-line bg-panel hover:border-muted"
+                      ? "border-ink bg-ink text-white"
+                      : "border-line bg-white text-ink hover:border-ink/20"
                   }`}
                 >
                   <span className="block text-sm font-medium">{ASSETS[id].label}</span>
-                  <span className="mt-0.5 block text-xs text-muted">{ASSETS[id].mark}</span>
+                  <span className={`mt-0.5 block text-xs ${assetId === id ? "text-white/70" : "text-muted"}`}>
+                    {ASSETS[id].mark}
+                  </span>
                 </button>
               ))}
             </div>
@@ -186,10 +187,10 @@ export function DeskApp() {
                   key={item.id}
                   type="button"
                   onClick={() => setSeat(item.id)}
-                  className={`rounded-lg border px-3 py-1.5 text-left text-sm ${
+                  className={`rounded-full border px-3 py-1.5 text-left text-sm ${
                     seat === item.id
-                      ? "border-keep/50 bg-keep-dim text-keep"
-                      : "border-line text-ink hover:border-muted"
+                      ? "border-ink bg-ink text-white"
+                      : "border-line bg-white text-ink hover:border-ink/20"
                   }`}
                 >
                   {item.label}
@@ -208,10 +209,10 @@ export function DeskApp() {
                   key={item.id}
                   type="button"
                   onClick={() => setSessionId(item.id)}
-                  className={`rounded-lg border px-3 py-1.5 text-sm ${
+                  className={`rounded-full border px-3 py-1.5 text-sm shadow-sm ${
                     sessionId === item.id
-                      ? "border-keep/50 bg-keep-dim text-keep"
-                      : "border-line hover:border-muted"
+                      ? "border-ink bg-ink text-white"
+                      : "border-line bg-white hover:border-ink/20"
                   }`}
                 >
                   {item.label}
@@ -249,14 +250,14 @@ export function DeskApp() {
 
           <Chart series={series} hours={session.hours} />
 
-          <section className="rounded-2xl border border-line bg-panel">
+          <section className="overflow-hidden rounded-3xl border border-line bg-white shadow-[0_12px_40px_rgba(22,32,48,0.06)]">
             <div className="flex items-center justify-between gap-3 border-b border-line px-4 py-3">
               <h2 className="text-sm font-medium">Prints that crossed the half spread</h2>
               <button
                 type="button"
                 onClick={() => setWalking((value) => !value)}
                 disabled={session.crossing.length === 0}
-                className="rounded-lg border border-line px-3 py-1 text-xs uppercase tracking-wider text-muted hover:text-ink disabled:opacity-40"
+                className="rounded-full bg-ink px-3 py-1.5 text-xs text-white disabled:opacity-40"
               >
                 {walking ? "Pause" : "Walk the tape"}
               </button>
@@ -298,7 +299,7 @@ export function DeskApp() {
                         <td className="px-3 py-2 font-mono">{ms(print.leadMs)}</td>
                         <td className="px-3 py-2 capitalize">{print.side}</td>
                         <td className="px-3 py-2 font-mono">{pct(print.fillFraction)}</td>
-                        <td className="px-4 py-2 text-right font-mono text-keep">
+                        <td className="px-4 py-2 text-right font-mono">
                           {usdExact(print.avoidedUsd)}
                         </td>
                       </tr>
@@ -366,9 +367,23 @@ export function DeskApp() {
   );
 }
 
+function Mark() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true">
+      <circle cx="16" cy="16" r="16" fill="#16181d" />
+      <path
+        d="M8.5 16c0-2.4 1.7-4 3.6-4 1.6 0 2.6.9 3.9 2.5C17.3 12.9 18.3 12 19.9 12c1.9 0 3.6 1.6 3.6 4s-1.7 4-3.6 4c-1.6 0-2.6-.9-3.9-2.5C14.7 19.1 13.7 20 12.1 20c-1.9 0-3.6-1.6-3.6-4z"
+        fill="none"
+        stroke="white"
+        strokeWidth="1.5"
+      />
+    </svg>
+  );
+}
+
 function Fact({ label, value, note }: { label: string; value: string; note: string }) {
   return (
-    <article className="rounded-2xl border border-line bg-panel px-4 py-3">
+    <article className="rounded-3xl border border-line bg-white px-4 py-4 shadow-[0_12px_40px_rgba(22,32,48,0.06)]">
       <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted">{label}</p>
       <p className="mt-1 font-mono text-2xl text-ink">{value}</p>
       <p className="mt-1 text-xs leading-relaxed text-muted">{note}</p>
@@ -378,10 +393,10 @@ function Fact({ label, value, note }: { label: string; value: string; note: stri
 
 function Metric({ label, value, note }: { label: string; value: string; note: string }) {
   return (
-    <article className="rounded-2xl border border-keep/30 bg-keep-dim px-4 py-3">
-      <p className="text-xs leading-snug text-keep/80">{label}</p>
-      <p className="mt-1 font-mono text-2xl text-keep">{value}</p>
-      <p className="mt-1 text-xs leading-relaxed text-keep/70">{note}</p>
+    <article className="rounded-3xl border border-line bg-white px-4 py-4 shadow-[0_12px_40px_rgba(22,32,48,0.06)]">
+      <p className="text-xs leading-snug text-muted">{label}</p>
+      <p className="mt-1 font-mono text-2xl text-ink">{value}</p>
+      <p className="mt-1 text-xs leading-relaxed text-muted">{note}</p>
     </article>
   );
 }
@@ -437,7 +452,7 @@ function Chart({ series, hours }: { series: number[]; hours: number }) {
     .join(" ");
 
   return (
-    <section className="rounded-2xl border border-line bg-panel px-4 py-3">
+    <section className="rounded-3xl border border-line bg-white px-4 py-4 shadow-[0_12px_40px_rgba(22,32,48,0.06)]">
       <div className="flex items-baseline justify-between gap-3">
         <h2 className="text-sm font-medium">Avoided pickoff, cumulative</h2>
         <p className="font-mono text-xs text-muted">
@@ -445,7 +460,7 @@ function Chart({ series, hours }: { series: number[]; hours: number }) {
         </p>
       </div>
       <svg viewBox={`0 0 ${width} ${height}`} className="mt-2 h-36 w-full" role="img" aria-label="Cumulative avoided pickoff">
-        <polyline fill="none" stroke="#b7e3c0" strokeWidth="2" points={points} />
+        <polyline fill="none" stroke="#16181d" strokeWidth="2" points={points} />
       </svg>
     </section>
   );
@@ -470,12 +485,12 @@ function PrintDetail({
 
   return (
     <section className="grid gap-3 lg:grid-cols-2">
-      <article className="rounded-2xl border border-stale/40 bg-stale-dim p-4">
-        <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-stale">
+      <article className="rounded-3xl border border-line bg-white p-5 shadow-[0_12px_40px_rgba(22,32,48,0.06)]">
+        <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted">
           Standard gossip
         </p>
         <h3 className="mt-1 text-lg font-medium">Still showing the old {print.side}</h3>
-        <p className="mt-2 text-sm leading-relaxed text-stale/90">
+        <p className="mt-2 text-sm leading-relaxed text-muted">
           The message is still completing. For {ms(print.leadMs)} the {print.side} at{" "}
           {px(stalePx, digits)} is through the new fair {px(print.newMid, digits)} by{" "}
           {bps(print.edgeBps)}. Takers lift {pct(print.fillFraction)} of the{" "}
@@ -483,30 +498,30 @@ function PrintDetail({
         </p>
         <dl className="mt-4 grid grid-cols-2 gap-3 font-mono text-sm">
           <div>
-            <dt className="text-[10px] uppercase tracking-wider text-stale/70">Bid</dt>
+            <dt className="text-[10px] uppercase tracking-wider text-muted">Bid</dt>
             <dd>{px(bid, digits)}</dd>
           </div>
           <div>
-            <dt className="text-[10px] uppercase tracking-wider text-stale/70">Offer</dt>
+            <dt className="text-[10px] uppercase tracking-wider text-muted">Offer</dt>
             <dd>{px(offer, digits)}</dd>
           </div>
           <div>
-            <dt className="text-[10px] uppercase tracking-wider text-stale/70">Pickoff</dt>
+            <dt className="text-[10px] uppercase tracking-wider text-muted">Pickoff</dt>
             <dd className="text-danger">{usdExact(print.avoidedUsd)}</dd>
           </div>
           <div>
-            <dt className="text-[10px] uppercase tracking-wider text-stale/70">Move</dt>
+            <dt className="text-[10px] uppercase tracking-wider text-muted">Move</dt>
             <dd>{bps(print.jumpBps)}</dd>
           </div>
         </dl>
       </article>
 
-      <article className="rounded-2xl border border-keep/40 bg-keep-dim p-4">
-        <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-keep">
-          mump2p gateway
+      <article className="rounded-3xl bg-ink p-5 text-white shadow-[0_12px_40px_rgba(22,32,48,0.12)]">
+        <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-white/60">
+          Optimum Signal
         </p>
         <h3 className="mt-1 text-lg font-medium">Decoded. That side is off.</h3>
-        <p className="mt-2 text-sm leading-relaxed text-keep/90">
+        <p className="mt-2 text-sm leading-relaxed text-white/75">
           Enough shards have arrived to decode, {ms(print.leadMs)} before gossip finishes
           the same block. The {print.side} is pulled for that window. When the quote
           returns it is around the new mid {px(print.newMid, digits)}, half a spread
@@ -514,19 +529,19 @@ function PrintDetail({
         </p>
         <dl className="mt-4 grid grid-cols-2 gap-3 font-mono text-sm">
           <div>
-            <dt className="text-[10px] uppercase tracking-wider text-keep/70">New bid</dt>
+            <dt className="text-[10px] uppercase tracking-wider text-white/50">New bid</dt>
             <dd>{px(print.newMid - newHalf, digits)}</dd>
           </div>
           <div>
-            <dt className="text-[10px] uppercase tracking-wider text-keep/70">New offer</dt>
+            <dt className="text-[10px] uppercase tracking-wider text-white/50">New offer</dt>
             <dd>{px(print.newMid + newHalf, digits)}</dd>
           </div>
           <div>
-            <dt className="text-[10px] uppercase tracking-wider text-keep/70">Pickoff</dt>
+            <dt className="text-[10px] uppercase tracking-wider text-white/50">Pickoff</dt>
             <dd>$0</dd>
           </div>
           <div>
-            <dt className="text-[10px] uppercase tracking-wider text-keep/70">Kept</dt>
+            <dt className="text-[10px] uppercase tracking-wider text-white/50">Kept</dt>
             <dd>{usdExact(print.avoidedUsd)}</dd>
           </div>
         </dl>
